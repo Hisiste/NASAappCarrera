@@ -1,0 +1,10 @@
+let Datos={
+  "n": "5",
+  "Datos": [
+    "El día en júpiter tiene 10 horas",
+    "Urano tarda 164.8 años en dar la vuelta al sol",
+    "La vía láctea es la galaxia en el que se encuentra la tierra",
+    "Mercurio es el planeta mas cercano al sol en la vía láctea",
+	"Marte tambien es conocido como el planeta rojo"
+  ]
+}
