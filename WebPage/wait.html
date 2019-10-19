@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8">
 	<link rel="icon" type="image/gif/png" href="logopage.png">
+
     <title>Now Loading</title>
 	<link rel="stylesheet" type="text/css" href="scripts/styles.css"/>
+
     <script src="scripts/P5js/p5.js"></script>
-	<script src="scripts/Widget.js"></script>
+    <script src="scripts/widget.js"></script>
   </head>
   <body text="white" align="center">
 
@@ -14,22 +16,29 @@
  		<h1>¿Sabías que...?</h1>
 	</div>
 
-	<p id="demo"></p>
-	
-	<script>
-	var Datos, x;
-	Datos={
-	"n": "5",
-	"Datos": [
-		"El día en júpiter tiene 10 horas",
-		"Urano tarda 164.8 años terrestres en dar la vuelta al sol",
-		"La vía láctea es la galaxia en el que se encuentra la tierra",
-		"Mercurio es el planeta mas cercano al sol en la vía láctea",
-		"Marte tambien es conocido como el planeta rojo"
-	]
-	}
-	x = Datos.Datos[Math.floor(10*Math.random())%5]; //Falta que sea aleatereo entre 0 y n-1
-	document.getElementById("demo").innerHTML = x;
-	</script>
+    <div class="trivia">
+
+        <div id="widgetHolder" class="loading">
+        </div>
+
+    	<p id="demo"></p>
+        	<script>
+            	var Datos, x;
+            	Datos={
+            	"n": "5",
+            	"Datos": [
+            		"El día en júpiter tiene 10 horas",
+            		"Urano tarda 164.8 años terrestres en dar la vuelta al sol",
+            		"La vía láctea es la galaxia en el que se encuentra la tierra",
+            		"Mercurio es el planeta mas cercano al sol en la vía láctea",
+            		"Marte tambien es conocido como el planeta rojo"
+            	]
+            	}
+            	x = Datos.Datos[Math.floor(10*Math.random())%5]; //Falta que sea aleatereo entre 0 y n-1
+            	document.getElementById("demo").innerHTML = x;
+        	</script>
+        </p>
+
+    </div>
   </body>
 </html>
