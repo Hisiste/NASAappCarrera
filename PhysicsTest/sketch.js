@@ -30,13 +30,31 @@ function draw() {
     //  Muestra el sistema.
     ssystem.show();
 
+    ssystem.collition(ship, ssystem);
+
     if (clicked) {
         mouseDragged();
+    }
+
+    if (!going) {
+        fill(123);
+        textSize(50);
+        text("Your time was", -200, -50);
+        text(FinishingTime, -50, 0);
+        text("seconds!",-150, 50);
     }
 
     //  Hasta que se lanze la nave es cuando todo empieza a andar.
     if (start) {
         ship.update(ssystem);
         ssystem.orbit();
+
+        TimeRecord();
+
+        if (OutOfCanvas(ship.pos)) {
+            fill(123);
+            textSize(20);
+            text("LO SIENTO CARNAL FALLASTE XD.", -100, -30);
+        }
     }
 }
