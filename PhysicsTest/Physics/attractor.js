@@ -16,8 +16,8 @@ class attractor {
         this.radius = r;
 
         this.distance = d;
-		//this.angle = random(0, 6.28);
-		this.angle = 0;
+		this.angle = random(0, 6.28);
+		//this.angle = 0;
         this.planets = [];
         this.orbitSpeed = random(0.01, 0.03);
 	}
@@ -59,6 +59,22 @@ class attractor {
 			this.planets[i] = new attractor(mass,radius, distance);
 		}
 	}
+
+	collition(Ship, SolarSystem) {
+        var dist=(sq(Ship.pos.x-SolarSystem.pos.x) + sq(Ship.pos.y-SolarSystem.pos.y));
+        var radios=Ship.radius+SolarSystem.radius;
+        if(sq(radios)>=dist){
+            GameOver();
+        }
+
+        for(var i = 0; i < SolarSystem.planets.length; i++){
+            dist=(sq(Ship.pos.x-SolarSystem.planets[i].pos.x) +sq(SolarSystem.planets[i].pos.y-Ship.pos.y));
+            radios=Ship.radius+SolarSystem.planets[i].radius;
+            if(sq(radios)>=dist){
+                GameOver();
+            }
+        }
+    }
 
 	show() {
         // Las funciones "push()" y "pop()" son para evitar que

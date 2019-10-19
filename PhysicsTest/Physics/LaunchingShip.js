@@ -2,6 +2,8 @@ let moved = false;
 let clicked = false;
 let unlocked = true;
 
+let timeStart;
+
 function mousePressed() {
   //  Las coordenadas de nuestra nave son (550, 450)
   if (mouseX < 560 && mouseX > 540 &&
@@ -13,7 +15,7 @@ function mousePressed() {
 function mouseDragged() {
   //  En caso de que previamente se haya clickeado la nave, se sabe
   //  que se acaba de definir una dirección.
-  if (clicked) {
+  if (clicked && going) {
     moved = true;
 
     let v1 = createVector(150, 150);
@@ -50,6 +52,7 @@ function mouseReleased() {
     //  evita que la nave siga siendo lanzada hacia otra ruta.
     start = true;
     unlocked = false;
+    timeStart = new Date();
   }
 
   //  En caso de que solamente haya sido clickeada, pero no definida
