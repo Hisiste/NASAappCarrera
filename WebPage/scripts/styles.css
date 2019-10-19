@@ -48,3 +48,8 @@ body {
     font-size: 2em;
     color: rgb(255, 253, 166);
 }
+
+canvas {
+    position: absolute;
+    z-index: 100;
+}
