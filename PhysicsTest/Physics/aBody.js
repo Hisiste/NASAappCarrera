@@ -17,11 +17,11 @@ class aBody {
 
         //Lo comentado abajo muestra la flecha de atracción gravitacional
 
-        stroke(255, 0, 0);
+        /*stroke(255, 0, 0);
         strokeWeight(4);
         line(this.pos.x,this.pos.y,this.vel.x,this.vel.y);
         strokeWeight(1);
-        stroke(0);
+        stroke(0);*/
     }
 
     update(rel) {

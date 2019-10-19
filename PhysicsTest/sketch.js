@@ -1,6 +1,7 @@
 let radius=50;
 let ssystem;
 let ship;
+let start = false;
 
 function setup() {
     createCanvas(800, 600);
@@ -23,11 +24,19 @@ function draw() {
 
     translate(width/2, height/2);
 
-    //Actualiza la velocidad orbital de la nave y la dibuja
-    ship.update(ssystem);
+    //  Dibuja la nave.
     ship.show();
 
-    //Muestra el systema y lo hace orbitar
+    //  Muestra el sistema.
     ssystem.show();
-    ssystem.orbit();
+
+    if (clicked) {
+        mouseDragged();
+    }
+
+    //  Hasta que se lanze la nave es cuando todo empieza a andar.
+    if (start) {
+        ship.update(ssystem);
+        ssystem.orbit();
+    }
 }
