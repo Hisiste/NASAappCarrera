@@ -3,8 +3,8 @@ function randn_bm() {
     var u = 0, v = 0;
     while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
     while(v === 0) v = Math.random();
-    //return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
-    return 10
+    return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+    //return 10
 }
 
 class attractor {
@@ -16,8 +16,8 @@ class attractor {
         this.radius = r;
 
         this.distance = d;
-		this.angle = random(0, 6.28);
-		//this.angle = 0;
+		//this.angle = random(0, 6.28);
+		this.angle = 0;
         this.planets = [];
         this.orbitSpeed = random(0.01, 0.03);
 	}
@@ -34,12 +34,18 @@ class attractor {
 	}
 
 	spawnMoons(Total) {
+        var distance = 0;
+		let ograd=floor(this.radius);
 		for (var i = 0; i < Total; i++) {
-            var mass = random (25,30);
-			var distance = random(100, 300);
+            //Genera una masa aleatoria para los objetos.
+            var mass = random(floor(this.mass*0.05),floor(this.mass*0.1));
+			//distance = distance + random(abs(floor((ograd/2)+(randn_bm()+5)*20)),abs(floor((ograd/2)+(randn_bm()+5)*30)));
+            distance = distance + random(ograd+30,ograd+50);
+
 			//	Mientras más grande sea "ratio", mayor será la diferencia en tamaños de los planetas de los extremos.
 			//	Evita un valor tal que si "distance = 100", el valor "radius" se haga negativo (usa Wolfram para checar ésto).
-			var ratio = 0.28;
+			var ratio = 0.11;
+
 			//	La variable del coseno hiperbólico es la distancia. (ratio*distance/20) determina lo rápido que decrece la
 			//	función. (- ratio*20) mueve la función para que su punto máximo sea cuando "distance = 200", el punto medio.
 			var x = (ratio*distance/10) - ratio*20;
@@ -48,7 +54,7 @@ class attractor {
 				que la v.a. X = Zs + m tiene distribución N(m, s^2). Al final se le suma +10 para que el punto máximo de la
 				función sea exactamente 9.
 			*/
-			var radius = randn_bm() + -(Math.exp(x)+Math.exp(-x))/2 + 10;
+			var radius = randn_bm() + -(Math.exp(x)+Math.exp(-x))/2 + ograd/2;
             //Cambia "new Planets" por "new attractor"
 			this.planets[i] = new attractor(mass,radius, distance);
 		}

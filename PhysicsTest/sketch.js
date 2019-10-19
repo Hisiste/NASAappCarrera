@@ -1,4 +1,4 @@
-let radius=50;
+let radius=10;
 let ssystem;
 let ship;
 let start = false;
@@ -9,7 +9,7 @@ function setup() {
 
     //Systema con 3 planetas, masa del sol=5
     ssystem=new attractor (5,radius,0);
-    ssystem.spawnMoons(3);
+    ssystem.spawnMoons(9);
 
     //Cuerpo orbital masa=1, radio=5, pos=(150,150)
     ship=new aBody (1,5,150,150);
