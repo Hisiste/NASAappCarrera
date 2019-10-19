@@ -1,3 +1,12 @@
+// Standard Normal variate using Box-Muller transform.
+function randn_bm() {
+    var u = 0, v = 0;
+    while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while(v === 0) v = Math.random();
+    //return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+    return 10
+}
+
 class attractor {
     //constructor recibe masa, radio y distancia
 	constructor(m,r,d) {
@@ -8,6 +17,7 @@ class attractor {
 
         this.distance = d;
 		this.angle = random(0, 6.28);
+		//this.angle = 0;
         this.planets = [];
         this.orbitSpeed = random(0.01, 0.03);
 	}
@@ -25,9 +35,20 @@ class attractor {
 
 	spawnMoons(Total) {
 		for (var i = 0; i < Total; i++) {
-			var radius = this.radius/10 - i;
             var mass = random (25,30);
 			var distance = random(100, 300);
+			//	Mientras más grande sea "ratio", mayor será la diferencia en tamaños de los planetas de los extremos.
+			//	Evita un valor tal que si "distance = 100", el valor "radius" se haga negativo (usa Wolfram para checar ésto).
+			var ratio = 0.28;
+			//	La variable del coseno hiperbólico es la distancia. (ratio*distance/20) determina lo rápido que decrece la
+			//	función. (- ratio*20) mueve la función para que su punto máximo sea cuando "distance = 200", el punto medio.
+			var x = (ratio*distance/10) - ratio*20;
+			/*
+				"randn_bm()" se aproxima a una v.a. de distribución normal estándar (Z con dist. N(0, 1)). Luego se tiene
+				que la v.a. X = Zs + m tiene distribución N(m, s^2). Al final se le suma +10 para que el punto máximo de la
+				función sea exactamente 9.
+			*/
+			var radius = randn_bm() + -(Math.exp(x)+Math.exp(-x))/2 + 10;
             //Cambia "new Planets" por "new attractor"
 			this.planets[i] = new attractor(mass,radius, distance);
 		}
