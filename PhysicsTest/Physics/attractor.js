@@ -15,6 +15,7 @@ class attractor {
 
     orbit() {
 		this.angle = this.angle + this.orbitSpeed;
+		this.pos = createVector(this.distance * cos(this.angle), this.distance * sin(this.angle))
 		if (this.planets != null) {
 			for (var i = 0; i < this.planets.length; i++){
 				this.planets[i].orbit();
@@ -25,7 +26,7 @@ class attractor {
 	spawnMoons(Total) {
 		for (var i = 0; i < Total; i++) {
 			var radius = this.radius/10 - i;
-            var mass = random (5,9);
+            var mass = random (25,30);
 			var distance = random(100, 300);
             //Cambia "new Planets" por "new attractor"
 			this.planets[i] = new attractor(mass,radius, distance);
@@ -35,13 +36,13 @@ class attractor {
 	show() {
         // Las funciones "push()" y "pop()" son para evitar que
 		// los "translate()" de los planetas se afecten entre sí.
-		push();
+		/*push();
 		rotate(this.angle);
         // El "translate()" es para dibujar los elipses en
         // coordenadas relativas a lo que se dibujó anteriormente.
-		translate(this.distance, 0);
+		translate(this.distance, 0);*/
 		fill(255);
-		ellipse(0, 0, this.radius*2, this.radius*2);
+		ellipse(this.distance * cos(this.angle), this.distance * sin(this.angle), this.radius*2, this.radius*2);
 		if (this.planets != null)
         {
 			for (var i = 0; i < this.planets.length; i++)
@@ -49,7 +50,7 @@ class attractor {
 				this.planets[i].show();
 			}
 		}
-		pop();
+		//pop();
 	}
 
     //Funcion para solo mostrar el sol
